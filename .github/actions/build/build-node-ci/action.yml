@@ -2,11 +2,11 @@ name: build-node-ci
 description: 'Build Node CI'
 author: 'b1to'
 
-node-version:
-  value:18
-  description: 'Node version'
-  required: true
-
+inputs:
+  node-version:
+    description: 'Node version'
+    required: true
+    default: '18'
 
 jobs:
   build:
@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js ${{ node-version }}
+      - name: Setup Node.js ${{ inputs.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ node-version }}
+          node-version: ${{ inputs.node-version }}
           cache: 'npm'
 
       - name: Run a one-line script
