@@ -12,8 +12,8 @@ runs:
   using: 'composite'
   steps:
 
-    -name: Obtener codigo fuente
-     uses: actions/checkout@v4
+    - name: 'Obtener codigo fuente'
+      uses: actions/checkout@v4
 
     - name: 'Comando echo'
       run: |
