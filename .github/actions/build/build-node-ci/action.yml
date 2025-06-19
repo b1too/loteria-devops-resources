@@ -3,37 +3,36 @@ description: 'Build Node CI'
 author: 'b1to'
 
 inputs:
-  - name: node-version
-      description: 'Node version'
-      required: true
-      default: 18.x
+  node-version:
+    description: 'Node version'
+    required: true
+    default: 18.x
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
+runs:
+  using: 'composite'
+  steps:
+    - name: Obtener codigo fuente
+      uses: actions/checkout@v4
       
-      - name: Setup Node.js ${{ inputs.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ inputs.node-version }}
-          cache: 'npm'
+    - name: Setup Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'npm'
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+    - name: Run a one-line script
+      run: echo Hello, world!
 
-      - name: Install dependencias
-        run: npm i
+    - name: Install dependencias
+      run: npm i
 
-      - name: Build project
-        run: npm run build
+    - name: Build project
+      run: npm run build
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-build
-          path: dist/
-          retention-days: 14
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.node-version }}
+        path: dist/
+        retention-days: 14
         
