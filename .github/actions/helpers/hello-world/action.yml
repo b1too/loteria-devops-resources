@@ -19,3 +19,4 @@ runs:
       run: |
         echo ${{ inputs.comentario }}
         echo '--------------------------------'
+        shell: bash
