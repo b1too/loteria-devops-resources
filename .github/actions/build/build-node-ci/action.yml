@@ -3,7 +3,7 @@ description: 'Build Node CI'
 author: 'b1to'
 
 inputs:
-  - node-version:
+  - name: node-version
       description: 'Node version'
       required: true
       default: 18.x
