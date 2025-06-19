@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js ${{inputs.node-version}}
+      - name: Setup Node.js ${{ inputs.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{inputs.node-version}}
+          node-version: ${{ inputs.node-version }}
           cache: 'npm'
 
       - name: Run a one-line script
