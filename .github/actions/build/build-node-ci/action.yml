@@ -35,4 +35,6 @@ runs:
         name: ${{ inputs.node-version }}
         path: dist/
         retention-days: 14
+      
+      shell: bash
         
