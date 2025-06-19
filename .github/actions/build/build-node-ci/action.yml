@@ -4,9 +4,9 @@ author: 'b1to'
 
 inputs:
   - node-version:
-    description: 'Node version'
-    required: true
-    default: 18.x
+      description: 'Node version'
+      required: true
+      default: 18.x
 
 jobs:
   build:
