@@ -12,11 +12,11 @@ runs:
   using: 'composite'
   steps:
 
-    - name: 'Obtener codigo fuente'
+    - name: Obtener código fuente
       uses: actions/checkout@v4
 
-    - name: 'Comando echo'
+    - name: 'Comando Echo'
       run: |
         echo ${{ inputs.comentario }}
         echo '--------------------------------'
-        shell: bash
+      shell: bash
