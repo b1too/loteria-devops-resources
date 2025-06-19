@@ -1,13 +1,11 @@
-name: 'Build Node CI'
+name: build-node-ci
 
-description: 'Build Node CI'
-author: 'b1to'
-
-inputs:
-  node-version:
-    description: 'Node version'
-    required: true
-    default: '18'
+on:
+  
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -17,30 +15,28 @@ jobs:
         os: [ubuntu-latest]
         node-version: [16.x]
 
-    runs:
-      using: 'composite'
+    steps:
+      - uses: actions/checkout@v4
       
-      steps:
-        - uses: actions/checkout@v4
+      - name: Setup Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+          cache: 'npm'
+
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      - name: Install dependencias
+        run: npm i
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{github.run_id}}
+          path: dist/
+          retention-days: 14
         
-        - name: Setup Node.js ${{matrix.node-version}}
-          uses: actions/setup-node@v3
-          with:
-            node-version: ${{matrix.node-version}}
-            cache: 'npm'
-
-        - name: Run a one-line script
-          run: echo Hello, world!
-
-        - name: Install dependencias
-          run: npm i
-
-        - name: Build project
-          run: npm run build
-
-        - name: Upload Build Artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: ${{github.run_id}}
-            path: dist/
-            retention-days: 14
