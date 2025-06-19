@@ -19,15 +19,15 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
-
-    - name: Run a one-line script
-      run: echo Hello, world!
+      shell: bash
 
     - name: Install dependencias
       run: npm i
+      shell: bash
 
     - name: Build project
       run: npm run build
+      shell: bash
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
@@ -35,6 +35,5 @@ runs:
         name: ${{ inputs.node-version }}
         path: dist/
         retention-days: 14
-      
       shell: bash
         
