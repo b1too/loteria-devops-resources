@@ -1,11 +1,18 @@
 name: build-node-ci
+description: 'Build Node CI'
+author: 'b1to'
+
+inputs:
+  node-version:
+    description: 'Node version'
+    required: true
+    default: '18'
 
 jobs:
   build:
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest]
         node-version: [16.x]
 
     steps:
@@ -29,7 +36,7 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{github.run_id}}
+          name: test-build
           path: dist/
           retention-days: 14
         
